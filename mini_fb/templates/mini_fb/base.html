@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
     <head>
         <title>Mini Facebook</title>
         {% load static %}
@@ -7,11 +7,11 @@
     </head>
     <body>
         <header>
+            <h1 class="facebook">Mini Facebook</h1>
             <nav>
-                <ul>
-                    <li><a href="{% url 'show_all_profiles' %}">All Profiles</a></li>
-                </ul>
+                   <a class="profilebutton" href="{% url 'show_all_profiles' %}">View All Profiles</a>
             </nav>
+            <hr>
         </header>
         <main>
             {% block content %}
