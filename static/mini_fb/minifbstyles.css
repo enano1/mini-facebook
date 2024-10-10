@@ -1,51 +1,90 @@
+/* General Body Styling */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #f0f4f8;
+    background-color: #4fa7ff;
 }
 
-.profile-container {
+/* Layout Styling */
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px; /* Increased gap to add more space between the cards */
+    margin-top: 20px;
+}
+
+/* Profile Card Styling */
+.profile-card {
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 30px;
+    padding: 15px 10px; /* Reduced padding to make the card smaller */
+    text-align: center;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 10px; /* Add margin to create extra space around each card */
 }
 
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Image Styling */
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Profile Info Styling */
+.profile-info {
+    margin-top: 10px;
+}
+.profile-large-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+
+/* Profile Header and Info Styling */
 .profile-header {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.profile-large-image {
-    width: 100px !important;
-    height: 100px !important;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 20px;
-    border: 3px solid #1a81c6;
-}
-
 .profile-header-info {
     flex-grow: 1;
 }
 
-.profile-header-info h2 {
-    font-size: 2em;
+.profile-header-info h2,
+.profile-name {
+    font-size: 1.2em;
+    font-weight: bold;
     color: #1a81c6;
     margin: 0;
 }
 
-.profile-location, .profile-email {
-    font-size: 1.1em;
+.profile-location,
+.profile-email,
+.profile-city {
+    font-size: 0.9em;
     color: #666;
-    margin: 5px 0;
+    margin-top: 5px;
 }
 
+/* Status Messages Styling */
 .status-messages-list {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
@@ -60,7 +99,6 @@ body {
 .status-message-timestamp {
     font-size: 0.9em;
     color: #888;
-    margin-bottom: 5px;
 }
 
 .status-message-text {
@@ -68,6 +106,7 @@ body {
     color: #333;
 }
 
+/* Button Styling */
 .profile-button {
     display: inline-block;
     padding: 10px 20px;
@@ -83,6 +122,7 @@ body {
     background-color: #155e94;
 }
 
+/* Horizontal Rule Styling */
 hr {
     border: none;
     border-top: 1px solid #ccc;

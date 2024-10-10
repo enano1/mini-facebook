@@ -1,10 +1,10 @@
-<!-- In templates/mini_fb/show_profile.html -->
+<!-- templates/mini_fb/show_profile.html -->
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
     <div class="profile-container">
         <div class="profile-header">
-            <img src="{{ profile.image_url }}" alt="{{ profile.fname }} {{ profile.lname }}" style="width: 500px; height: 500px;">
+            <img src="{{ profile.image_url }}" alt="{{ profile.fname }} {{ profile.lname }}" style="width: 500px;">
             <div class="profile-header-info">
                 <h2>{{ profile.fname }} {{ profile.lname }}</h2>
                 <p class="profile-location">{{ profile.city }}</p>

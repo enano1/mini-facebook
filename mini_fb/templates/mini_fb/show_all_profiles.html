@@ -2,8 +2,8 @@
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
+    <h2>All Profiles</h2>
     <div class="profile-grid">
-
         {% for profile in profiles %}
         <div class="profile-card">
             <a href="{% url 'show_profile' profile.pk %}"> 
