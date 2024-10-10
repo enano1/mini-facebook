@@ -1,68 +1,90 @@
-/* General body styling */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
-    background-color: #bed8ed;
-
+    background-color: #f0f4f8;
 }
 
-.profile-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.profile-card {
+.profile-container {
     background-color: #ffffff;
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(78, 75, 75, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
 }
 
-.profile-image {
-    width: 75px; 
-    height: 75px; 
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-large-image {
+    width: 100px !important;
+    height: 100px !important;
     object-fit: cover;
     border-radius: 50%;
+    margin-right: 20px;
+    border: 3px solid #1a81c6;
+}
+
+.profile-header-info {
+    flex-grow: 1;
+}
+
+.profile-header-info h2 {
+    font-size: 2em;
+    color: #1a81c6;
+    margin: 0;
+}
+
+.profile-location, .profile-email {
+    font-size: 1.1em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.status-messages-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.status-message-item {
+    background-color: #e9f7ff;
+    border: 1px solid #1a81c6;
+    border-radius: 5px;
+    padding: 15px;
     margin-bottom: 10px;
 }
 
-.profile-name {
-    font-weight: bold;
+.status-message-timestamp {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.status-message-text {
     font-size: 1.1em;
-    color: #1a81c6;
-}
-
-.profile-city {
-    color: #666;
-}
-
-.facebook {
-    color: #1a81c6;
-    font-weight: bold;
-}
-
-.profilebutton {
-    color: #1a81c6;
-    font-weight: bold;
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    text-align: center;
-}
-
-h1 {
-    font-size: 2em;
     color: #333;
+}
+
+.profile-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1a81c6;
+    color: #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.profile-button:hover {
+    background-color: #155e94;
 }
 
 hr {
-    color: #333;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
 }

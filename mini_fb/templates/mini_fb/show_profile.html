@@ -1,28 +1,38 @@
-<!-- templates/mini_fb/show_profile.html -->
+<!-- In templates/mini_fb/show_profile.html -->
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
-    <h2>{{ profile.fname }} {{ profile.lname }}'s Profile</h2>
-    <img src="{{ profile.image_url }}" alt="{{ profile.fname }} {{ profile.lname }}" style="width: 200px; height: auto;">
-    
-    <h3>Profile Details:</h3>
-    <table>
-        <tr><th>First Name:</th><td>{{ profile.fname }}</td></tr>
-        <tr><th>Last Name:</th><td>{{ profile.lname }}</td></tr>
-        <tr><th>City:</th><td>{{ profile.city }}</td></tr>
-        <tr><th>Email:</th><td>{{ profile.email }}</td></tr>
-    </table>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="{{ profile.image_url }}" alt="{{ profile.fname }} {{ profile.lname }}" style="width: 500px; height: 500px;">
+            <div class="profile-header-info">
+                <h2>{{ profile.fname }} {{ profile.lname }}</h2>
+                <p class="profile-location">{{ profile.city }}</p>
+                <p class="profile-email">{{ profile.email }}</p>
+            </div>
+        </div>
 
-    <h3>Status Messages:</h3>
-    {% if profile.get_status_messages %}
-        <ul>
-            {% for message in profile.get_status_messages %}
-                <li>{{ message.timestamp }} - {{ message.message }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No status messages available.</p>
-    {% endif %}
+        <hr>
 
-    <a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
+        <h3>Status Messages:</h3>
+        {% if profile.get_status_messages %}
+            <ul class="status-messages-list">
+                {% for message in profile.get_status_messages %}
+                    <li class="status-message-item">
+                        <div class="status-message-timestamp">{{ message.timestamp|date:"F j, Y, g:i a" }}</div>
+                        <div class="status-message-text">{{ message.message }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No status messages available.</p>
+        {% endif %}
+
+        <div class="status-form-link">
+            <a href="{% url 'create_status' profile.pk %}" class="profile-button">Post a New Status Message</a>
+        </div>
+
+        <br>
+        <a href="{% url 'show_all_profiles' %}" class="profile-button">Back to all profiles</a>
+    </div>
 {% endblock %}
