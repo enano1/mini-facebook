@@ -6,7 +6,7 @@
 
         {% for profile in profiles %}
         <div class="profile-card">
-            <a href="{% url 'show_profile' profile.pk %}"> <!-- Link to individual profile page -->
+            <a href="{% url 'show_profile' profile.pk %}"> 
                 <img src="{{ profile.image_url }}" class="profile-image" alt="{{ profile.fname }} {{ profile.lname }}">
             </a>
 

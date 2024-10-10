@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+# from typing import Any
 
 # Create your models here.
 class Profile(models.Model):
@@ -23,6 +25,8 @@ class Profile(models.Model):
     def get_status_messages(self):
         return self.status_messages.all().order_by('-timestamp')
 
+    def get_absolute_url(self):
+        return reverse('show_profile', args=[str(self.pk)])
     
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)

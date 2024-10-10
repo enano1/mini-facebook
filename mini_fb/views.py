@@ -13,5 +13,18 @@ from django.views.generic.detail import DetailView
 
 class ShowProfilePageView(DetailView):
     model = Profile
-    template_name = 'mini_fb/show_profile.html'  # Points to the template for showing a profile
-    context_object_name = 'profile'  # The context name for the Profile object
+    template_name = 'mini_fb/show_profile.html'  
+    context_object_name = 'profile'  
+
+
+# In mini_fb/views.py
+from django.urls import reverse
+from django.views.generic.edit import CreateView
+from .forms import CreateProfileForm
+
+class CreateProfileView(CreateView):
+    form_class = CreateProfileForm
+    template_name = 'mini_fb/create_profile_form.html'  
+    
+    def get_success_url(self):
+        return reverse('show_profile', args=[self.object.pk])
