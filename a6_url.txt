@@ -1,1 +1,1 @@
-https://mini-fb-paul-martin-enanos-projects.vercel.app/
+https://mini-fb.vercel.app/
