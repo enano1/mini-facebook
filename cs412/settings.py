@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-c7^jr7tqdc=)rdehgxkw1w&d_#3l4%_7#ip52)d5@dwy2x2@=s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'https://resturants-cs412.vercel.app/', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*', 'https://mini-facebook-60a0fdbecf2e.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -77,13 +77,11 @@ WSGI_APPLICATION = "cs412.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
