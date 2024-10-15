@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-c7^jr7tqdc=)rdehgxkw1w&d_#3l4%_7#ip52)d5@dwy2x2@=s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'https://mini-facebook-60a0fdbecf2e.herokuapp.com/', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -121,6 +121,7 @@ STATIC_URL = "static/"
 import os # operating system library
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')  # This tells Django where to put static files during deployment
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # This tells Django where to find static files during development
+
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
