@@ -5,12 +5,10 @@
     <div class="form-container">
         <h2>Post a New Status Message for {{ profile.fname }} {{ profile.lname }}</h2>
         
-        <!-- Add enctype for handling file uploads -->
         <form method="POST" enctype="multipart/form-data" class="styled-form">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Automatically renders form fields (message) -->
+            {{ form.as_p }} 
 
-            <!-- Add file input for uploading multiple images -->
             <label for="id_files">Attach images (optional):</label>
             <input type="file" name="files" id="id_files" multiple>
 

@@ -13,6 +13,7 @@
         </div>
         <div class="profile-update-link">
             <a href="{% url 'update_profile' profile.pk %}" class="profile-button">Update Profile</a>
+            <a href="{% url 'create_status' profile.pk %}" class="profile-button">Post a New Status Message</a>
         </div>
 
         <hr>
@@ -38,10 +39,6 @@
         {% else %}
             <p>No status messages available.</p>
         {% endif %}
-
-        <div class="status-form-link">
-            <a href="{% url 'create_status' profile.pk %}" class="profile-button">Post a New Status Message</a>
-        </div>
 
         <br>
         <a href="{% url 'show_all_profiles' %}" class="profile-button">Back to all profiles</a>
