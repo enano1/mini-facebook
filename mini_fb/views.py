@@ -29,11 +29,36 @@ class CreateProfileView(CreateView):
         return reverse('show_profile', args=[self.object.pk])
 
 
+from django.shortcuts import redirect
+from .models import Profile, StatusMessage, Image
 
 class CreateStatusMessageView(CreateView):
     form_class = CreateStatusMessageForm
     template_name = 'mini_fb/create_status_form.html'
-    
+
+    def form_valid(self, form):
+        """
+        Save the StatusMessage and handle the image upload.
+        """
+        # Save the form, which will save the StatusMessage
+        sm = form.save(commit=False)
+        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        sm.profile = profile
+        sm.save()
+
+        # Read the files from the request
+        files = self.request.FILES.getlist('files')  # Get the list of uploaded files
+
+        # Process each file and create Image objects
+        for file in files:
+            image = Image(
+                image_file=file,
+                status_message=sm  # Link the image to the status message
+            )
+            image.save()
+
+        return redirect('show_profile', pk=profile.pk)
+
     def get_context_data(self, **kwargs):
         """
         Add the profile to the context.
@@ -42,32 +67,16 @@ class CreateStatusMessageView(CreateView):
         profile = Profile.objects.get(pk=self.kwargs['pk'])
         context['profile'] = profile
         return context
-    
-    def form_valid(self, form):
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
-        form.instance.profile = profile
-        
-        # Save the status message first
-        response = super().form_valid(form)
-        
-        # Handle the file upload if an image is uploaded
-        if self.request.FILES.get('image_file'):
-            image = Image(
-                image_file=self.request.FILES['image_file'],
-                status_message=form.instance  # Link the image to the newly created status message
-            )
-            image.save()
-        
-        return response
 
     def get_success_url(self):
         return reverse('show_profile', args=[self.kwargs['pk']])
+    
+    
 class StatusMessageForm(forms.ModelForm):
     '''Form to post a new StatusMessage, with an option to add an image.'''
     
-    # Add an image field (not required)
     image_file = forms.ImageField(required=False)
     
     class Meta:
         model = StatusMessage
-        fields = ['message']  # Include only the message field
+        fields = ['message']  

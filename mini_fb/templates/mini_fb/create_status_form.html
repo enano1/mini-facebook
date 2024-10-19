@@ -8,7 +8,11 @@
         <!-- Add enctype for handling file uploads -->
         <form method="POST" enctype="multipart/form-data" class="styled-form">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Automatically renders all form fields, including the image field -->
+            {{ form.as_p }}  <!-- Automatically renders form fields (message) -->
+
+            <!-- Add file input for uploading multiple images -->
+            <label for="id_files">Attach images (optional):</label>
+            <input type="file" name="files" id="id_files" multiple>
 
             <br><br>
             <button type="submit" class="profile-button">Post Status</button>
