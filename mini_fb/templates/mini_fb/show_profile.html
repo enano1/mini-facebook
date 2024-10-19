@@ -26,6 +26,10 @@
                         <div class="status-message-timestamp">{{ message.timestamp|date:"F j, Y, g:i a" }}</div>
                         <div class="status-message-text">{{ message.message }}</div>
 
+                        <a href="{% url 'update_status' message.pk %}" class="profile-button">Update</a>
+    
+                        <a href="{% url 'delete_status' message.pk %}" class="profile-button">Delete</a>
+                    
                         {% if message.get_images.all %}
                             <div class="status-message-images">
                                 {% for img in message.get_images %}
