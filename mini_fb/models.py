@@ -35,5 +35,20 @@ class StatusMessage(models.Model):
 
     def __str__(self):
         return f"{self.timestamp} - {self.message[:20]}..."
+    
+    def get_images(self):
+        '''Return all images associated with this StatusMessage.'''
+        return self.images.all()  
+    
+class Image(models.Model):
+    '''
+    Encapsulate the idea of an image attached to a StatusMessage.
+    '''
+    image_file = models.ImageField(upload_to='images/') 
+    status_message = models.ForeignKey('StatusMessage', on_delete=models.CASCADE, related_name='images')  
+    timestamp = models.DateTimeField(auto_now_add=True)  
+    def __str__(self):
+        return f"Image {self.id} for StatusMessage {self.status_message.id}"
+
 
 

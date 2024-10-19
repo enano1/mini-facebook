@@ -21,6 +21,15 @@
                     <li class="status-message-item">
                         <div class="status-message-timestamp">{{ message.timestamp|date:"F j, Y, g:i a" }}</div>
                         <div class="status-message-text">{{ message.message }}</div>
+
+                        <!-- Display images associated with the status message -->
+                        {% if message.get_images.all %}
+                            <div class="status-message-images">
+                                {% for img in message.get_images %}
+                                    <img src="{{ img.image_file.url }}" alt="Status Image" style="max-width: 300px;">
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>

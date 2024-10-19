@@ -4,11 +4,16 @@
 {% block content %}
     <div class="form-container">
         <h2>Post a New Status Message for {{ profile.fname }} {{ profile.lname }}</h2>
-        <form method="POST" class="styled-form">
+        
+        <!-- Add enctype for handling file uploads -->
+        <form method="POST" enctype="multipart/form-data" class="styled-form">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.as_p }}  <!-- Automatically renders all form fields, including the image field -->
+
+            <br><br>
             <button type="submit" class="profile-button">Post Status</button>
         </form>
+
         <a href="{% url 'show_profile' profile.pk %}" class="profile-button">Back to profile</a>
     </div>
 {% endblock %}
