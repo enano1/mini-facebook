@@ -11,6 +11,9 @@
                 <p class="profile-email">{{ profile.email }}</p>
             </div>
         </div>
+        <div class="profile-update-link">
+            <a href="{% url 'update_profile' profile.pk %}" class="profile-button">Update Profile</a>
+        </div>
 
         <hr>
 
@@ -22,7 +25,6 @@
                         <div class="status-message-timestamp">{{ message.timestamp|date:"F j, Y, g:i a" }}</div>
                         <div class="status-message-text">{{ message.message }}</div>
 
-                        <!-- Display images associated with the status message -->
                         {% if message.get_images.all %}
                             <div class="status-message-images">
                                 {% for img in message.get_images %}

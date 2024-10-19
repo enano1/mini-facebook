@@ -80,3 +80,19 @@ class StatusMessageForm(forms.ModelForm):
     class Meta:
         model = StatusMessage
         fields = ['message']  
+
+from django.urls import reverse
+from django.views.generic import UpdateView
+from .models import Profile
+from .forms import UpdateProfileForm
+
+class UpdateProfileView(UpdateView):
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_fb/update_profile_form.html'
+    
+    def get_success_url(self):
+        """
+        After updating the profile, redirect back to the profile page.
+        """
+        return reverse('show_profile', args=[self.object.pk])
