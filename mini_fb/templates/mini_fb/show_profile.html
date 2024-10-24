@@ -19,12 +19,11 @@
         <hr>
 
         <h3>Friends:</h3>
-        <div class="friends-grid">
+        <div class="friends-list" style="display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 10px;">
             {% if profile.get_friends %}
                 {% for friend in profile.get_friends %}
-                    <div class="friend-box">
+                    <div class="friend-box" style="flex: 0 0 auto;">
                         <a href="{% url 'show_profile' friend.pk %}">
-                            <!-- Image with a border to simulate a "box" around it -->
                             <div class="friend-image-box">
                                 <img class="friend-image" src="{{ friend.image_url }}" alt="{{ friend.fname }} {{ friend.lname }}" style="max-width: 150px; max-height: 150px;">
                             </div>
@@ -38,6 +37,8 @@
                 <p>This profile has no friends.</p>
             {% endif %}
         </div>
+        <a href="{% url 'friend_suggestions' profile.pk %}" class="profile-button">View Friend Suggestions</a>
+
         
 
         <hr>
@@ -53,7 +54,6 @@
                         <a href="{% url 'update_status' message.pk %}" class="profile-button">Update</a>
                         <a href="{% url 'delete_status' message.pk %}" class="profile-button">Delete</a>
                     
-                        <!-- Display images associated with the status message -->
                         {% if message.get_images.all %}
                             <div class="status-message-images">
                                 {% for img in message.get_images %}

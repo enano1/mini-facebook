@@ -35,6 +35,40 @@ class Profile(models.Model):
                 friend_profiles.append(friend.profile1)
         return friend_profiles
 
+    def add_friend(self, other):
+        """Add another profile as a friend if no duplicate relationship exists."""
+        if self == other:
+            # Prevent self-friending
+            return
+
+        # Check if the friend relationship already exists
+        existing_friendship = Friend.objects.filter(
+            models.Q(profile1=self, profile2=other) | models.Q(profile1=other, profile2=self)
+        ).exists()
+
+        if not existing_friendship:
+            # If no existing friendship, create one
+            Friend.objects.create(profile1=self, profile2=other)
+
+    def get_friends(self):
+        """Retrieve all friends of this profile."""
+        friends = Friend.objects.filter(models.Q(profile1=self) | models.Q(profile2=self))
+        friend_profiles = []
+        for friend in friends:
+            if friend.profile1 == self:
+                friend_profiles.append(friend.profile2)
+            else:
+                friend_profiles.append(friend.profile1)
+        return friend_profiles
+
+    def get_friend_suggestions(self):
+        """Get friend suggestions for this profile."""
+        # Get all profiles except the current one and current friends
+        friends = self.get_friends()
+        all_profiles = Profile.objects.exclude(pk=self.pk)
+        suggested_friends = all_profiles.exclude(pk__in=[friend.pk for friend in friends])
+        return suggested_friends
+
 
     def get_absolute_url(self):
         return reverse('show_profile', args=[str(self.pk)])

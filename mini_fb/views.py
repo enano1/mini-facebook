@@ -1,7 +1,7 @@
 from django.urls import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.views.generic.edit import CreateView
 
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
@@ -112,3 +112,36 @@ class UpdateStatusMessageView(UpdateView):
         """
         profile_pk = self.object.profile.pk  
         return reverse('show_profile', args=[profile_pk])
+
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import View
+from django.contrib import messages
+from .models import Profile
+
+class CreateFriendView(View):
+    """A view to add a friend to the profile."""
+
+    def dispatch(self, request, *args, **kwargs):
+        # Access the profile IDs from self.kwargs
+        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])  # The profile doing the adding
+        other_profile = get_object_or_404(Profile, pk=self.kwargs['other_pk'])  # The profile being added as a friend
+
+        # Call the add_friend method to add the other_profile as a friend
+        profile.add_friend(other_profile)
+
+        # Optionally add a success message
+        messages.success(request, f'You are now friends with {other_profile.fname} {other_profile.lname}!')
+
+        # Redirect back to the profile page after adding the friend
+        return redirect('show_profile', pk=profile.pk)
+    
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['friend_suggestions'] = self.object.get_friend_suggestions()
+        return context
+
