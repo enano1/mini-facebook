@@ -24,6 +24,17 @@ class Profile(models.Model):
     
     def get_status_messages(self):
         return self.status_messages.all().order_by('-timestamp')
+    
+    def get_friends(self):
+        friends = Friend.objects.filter(models.Q(profile1=self) | models.Q(profile2=self))
+        friend_profiles = []
+        for friend in friends:
+            if friend.profile1 == self:
+                friend_profiles.append(friend.profile2)
+            else:
+                friend_profiles.append(friend.profile1)
+        return friend_profiles
+
 
     def get_absolute_url(self):
         return reverse('show_profile', args=[str(self.pk)])
@@ -52,3 +63,10 @@ class Image(models.Model):
 
 
 
+class Friend(models.Model):
+    profile1 = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='profile1')
+    profile2 = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='profile2')
+    timestamp = models.DateTimeField(auto_now_add=True)  # Store the time when friendship was created
+
+    def __str__(self):
+        return f"{self.profile1.fname} {self.profile1.lname} & {self.profile2.fname} {self.profile2.lname}"
