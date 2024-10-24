@@ -63,12 +63,20 @@ class Profile(models.Model):
 
     def get_friend_suggestions(self):
         """Get friend suggestions for this profile."""
-        # Get all profiles except the current one and current friends
         friends = self.get_friends()
         all_profiles = Profile.objects.exclude(pk=self.pk)
         suggested_friends = all_profiles.exclude(pk__in=[friend.pk for friend in friends])
         return suggested_friends
 
+    def get_news_feed(self):
+        """Retrieve status messages for the current profile and their friends."""
+
+        friends = self.get_friends()
+
+        profile_ids = [self.pk] + [friend.pk for friend in friends]
+        
+
+        return StatusMessage.objects.filter(profile__id__in=profile_ids).order_by('-timestamp')
 
     def get_absolute_url(self):
         return reverse('show_profile', args=[str(self.pk)])

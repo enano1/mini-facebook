@@ -4,16 +4,20 @@
 {% block content %}
     <h3>Friend Suggestions for {{ profile.fname }} {{ profile.lname }}</h3>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <div class="friends-grid">
         {% if friend_suggestions %}
             {% for suggestion in friend_suggestions %}
-                <div style="border: 1px solid #ccc; padding: 10px; max-width: 150px; text-align: center;">
-                    <img src="{{ suggestion.image_url }}" alt="{{ suggestion.fname }} {{ suggestion.lname }}" style="max-width: 50px; max-height: 50px;">
-                    <div>{{ suggestion.fname }} {{ suggestion.lname }}</div>
-                    <form action="{% url 'add_friend' profile.pk suggestion.pk %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="profile-button">Add Friend</button>
-                    </form>
+                <div class="friend-box">
+                    <div class="friend-image-box">
+                        <img src="{{ suggestion.image_url }}" alt="{{ suggestion.fname }} {{ suggestion.lname }}" class="friend-image">
+                    </div>
+                    <div class="friend-info">
+                        <div class="friend-name">{{ suggestion.fname }} {{ suggestion.lname }}</div>
+                        <form action="{% url 'add_friend' profile.pk suggestion.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="profile-button">Add Friend</button>
+                        </form>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}

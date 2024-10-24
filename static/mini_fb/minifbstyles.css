@@ -155,10 +155,69 @@ hr {
 }
 
 .friend-name {
-    background-color: blue;
+    background-color: rgb(0, 123, 255);
     color: white;
     padding: 5px;
     border-radius: 5px;
     display: inline-block;
 }
 
+.news-feed-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.news-feed-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: white;
+    align-content: center;
+}
+
+.news-feed-profile-info {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.news-feed-profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    align-items: center;
+    align-content: center;
+}
+
+.news-feed-profile-name {
+    font-weight: bold;
+}
+
+.news-feed-status {
+    margin-top: 10px;
+}
+
+.news-feed-timestamp {
+    font-size: 0.8em;
+    color: #303030;
+    justify-content: center;
+    align-items: center;
+}
+
+.news-feed-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-feed-images img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    align-content: center;
+}

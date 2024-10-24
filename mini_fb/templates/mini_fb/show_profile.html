@@ -14,6 +14,8 @@
         <div class="profile-update-link">
             <a href="{% url 'update_profile' profile.pk %}" class="profile-button">Update Profile</a>
             <a href="{% url 'create_status' profile.pk %}" class="profile-button">Post a New Status Message</a>
+            <a href="{% url 'news_feed' profile.pk %}" class="profile-button">View News Feed</a>
+
         </div>
 
         <hr>
@@ -38,8 +40,6 @@
             {% endif %}
         </div>
         <a href="{% url 'friend_suggestions' profile.pk %}" class="profile-button">View Friend Suggestions</a>
-
-        
 
         <hr>
 

@@ -122,17 +122,13 @@ class CreateFriendView(View):
     """A view to add a friend to the profile."""
 
     def dispatch(self, request, *args, **kwargs):
-        # Access the profile IDs from self.kwargs
         profile = get_object_or_404(Profile, pk=self.kwargs['pk'])  # The profile doing the adding
         other_profile = get_object_or_404(Profile, pk=self.kwargs['other_pk'])  # The profile being added as a friend
 
-        # Call the add_friend method to add the other_profile as a friend
         profile.add_friend(other_profile)
 
-        # Optionally add a success message
         messages.success(request, f'You are now friends with {other_profile.fname} {other_profile.lname}!')
 
-        # Redirect back to the profile page after adding the friend
         return redirect('show_profile', pk=profile.pk)
     
 class ShowFriendSuggestionsView(DetailView):
@@ -143,5 +139,17 @@ class ShowFriendSuggestionsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['friend_suggestions'] = self.object.get_friend_suggestions()
+        return context
+
+
+class ShowNewsFeedView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['news_feed'] = self.object.get_news_feed()
         return context
 
