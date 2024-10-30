@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 # from typing import Any
 
 # Create your models here.
@@ -7,6 +8,7 @@ class Profile(models.Model):
     '''
     Encapsulate the idea of one Profile by some user.
     '''
+    user = models.ForeignKey(User, on_delete=models.CASCADE) ## NEW
 
     fname = models.TextField(blank=False) #cannot be blank
     lname = models.TextField(blank=False)

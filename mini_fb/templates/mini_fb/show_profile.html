@@ -11,11 +11,16 @@
                 <p class="profile-email">{{ profile.email }}</p>
             </div>
         </div>
-        <div class="profile-update-link">
-            <a href="{% url 'update_profile' profile.pk %}" class="profile-button">Update Profile</a>
-            <a href="{% url 'create_status' profile.pk %}" class="profile-button">Post a New Status Message</a>
-            <a href="{% url 'news_feed' profile.pk %}" class="profile-button">View News Feed</a>
 
+        <div class="profile-update-link">
+            {% if request.user == profile.user %}
+                <a href="{% url 'update_profile' profile.pk %}" class="profile-button">Update Profile</a>
+                <a href="{% url 'create_status' profile.pk %}" class="profile-button">Post a New Status Message</a>
+                <a href="{% url 'news_feed' profile.pk %}" class="profile-button">View News Feed</a>
+                <a href="{% url 'friend_suggestions' profile.pk %}" class="profile-button">View Friend Suggestions</a>
+            {% else %}
+                <p class="info-text">Only the profile owner can edit this profile and view additional features.</p>
+            {% endif %}
         </div>
 
         <hr>
@@ -39,7 +44,6 @@
                 <p>This profile has no friends.</p>
             {% endif %}
         </div>
-        <a href="{% url 'friend_suggestions' profile.pk %}" class="profile-button">View Friend Suggestions</a>
 
         <hr>
 
@@ -51,8 +55,12 @@
                         <div class="status-message-timestamp">{{ message.timestamp|date:"F j, Y, g:i a" }}</div>
                         <div class="status-message-text">{{ message.message }}</div>
 
-                        <a href="{% url 'update_status' message.pk %}" class="profile-button">Update</a>
-                        <a href="{% url 'delete_status' message.pk %}" class="profile-button">Delete</a>
+                        {% if request.user == profile.user %}
+                            <a href="{% url 'update_status' message.pk %}" class="profile-button">Update</a>
+                            <a href="{% url 'delete_status' message.pk %}" class="profile-button">Delete</a>
+                        {% else %}
+                            <p class="info-text">Only the profile owner can manage this status.</p>
+                        {% endif %}
                     
                         {% if message.get_images.all %}
                             <div class="status-message-images">
