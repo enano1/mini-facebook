@@ -7,7 +7,11 @@
         {% for profile in profiles %}
         <div class="profile-card">
             <a href="{% url 'show_profile' profile.pk %}"> 
-                <img src="{{ profile.image_url }}" class="profile-image" alt="{{ profile.fname }} {{ profile.lname }}">
+                {% if profile.image %}
+                    <img src="{{ profile.image.url }}" alt="{{ profile.fname }}'s profile picture">
+                {% else %}
+                    <p>No profile image uploaded.</p>
+                {% endif %}
             </a>
 
             <div class="profile-info">
@@ -18,3 +22,4 @@
         {% endfor %}
     </div>
 {% endblock %}
+

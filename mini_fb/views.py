@@ -174,13 +174,11 @@ class CreateFriendView(LoginRequiredMixin, View):
     
 class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
     model = Profile
-    template_name = 'mini_fb/friend_suggestions.html'
+    template_name = 'tide/friend_suggestions.html'  # Updated path
     context_object_name = 'profile'
     
     def get_login_url(self) -> str:
-        '''return the URL required for login'''
         return reverse('login')
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
