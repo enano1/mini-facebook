@@ -1,0 +1,23 @@
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<h1>Voter Graphs</h1>
+
+<h2>Graphs</h2>
+
+<div style="text-align: center;">
+    <h3 style="display: inline-block;">Distribution of Voters by Year of Birth</h3>
+    {{ graph_birth_year|safe }}
+</div>
+
+<div style="text-align: center;">
+    <h3 style="display: inline-block;">Distribution of Voters by Party Affiliation</h3>
+    {{ graph_party_affiliation|safe }}
+</div>
+
+<div style="text-align: center;">
+    <h3 style="display: inline-block;">Voter Participation in Elections</h3>
+    {{ graph_election_participation|safe }}
+</div>
+
+{% endblock %}

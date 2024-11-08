@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mini_fb",
+    "voter_analytics",
 ]
 
 MIDDLEWARE = [

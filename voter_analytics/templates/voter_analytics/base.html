@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voter Analytics</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'voters' %}">Home</a>
+        <a href="{% url 'graphs' %}">Graphs</a>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
