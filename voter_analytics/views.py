@@ -76,11 +76,11 @@ class VoterDetailView(DetailView):
             'v23town': voter.v23town,
         }
 
-        data = go.Bar(x=list(participation_data.keys()), y=[int(v) for v in participation_data.values()])
-        layout = go.Layout(title=f'{voter.first_name} {voter.last_name} - Election Participation', xaxis={'title': 'Elections'}, yaxis={'title': 'Voted (1: Yes, 0: No)'})
-        fig = go.Figure(data=[data], layout=layout)
+        # data = go.Bar(x=list(participation_data.keys()), y=[int(v) for v in participation_data.values()])
+        # layout = go.Layout(title=f'{voter.first_name} {voter.last_name} - Election Participation', xaxis={'title': 'Elections'}, yaxis={'title': 'Voted (1: Yes, 0: No)'})
+        # fig = go.Figure(data=[data], layout=layout)
 
-        context['voter_participation_graph'] = pyo.plot(fig, auto_open=False, output_type='div')
+        # context['voter_participation_graph'] = pyo.plot(fig, auto_open=False, output_type='div')
 
         return context
 
