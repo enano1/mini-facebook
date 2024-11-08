@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.views.generic import ListView
 from .models import Voter
 from django.views.generic import ListView, DetailView
 from .models import Voter
@@ -54,8 +53,8 @@ class VoterListView(ListView):
         context['election_fields'] = ['v20state', 'v21town', 'v21primary', 'v22general', 'v23town']
         return context
 
-import plotly.graph_objs as go
-import plotly.offline as pyo
+# import plotly.graph_objs as go
+# import plotly.offline as pyo
 from django.views.generic import DetailView
 from .models import Voter
 
