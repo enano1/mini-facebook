@@ -8,6 +8,8 @@ django = "*"
 dj-database-url = "*"
 gunicorn = "*"
 pillow = "*"
+plotly = "*"
+pandas = "*"
 
 [dev-packages]
 
