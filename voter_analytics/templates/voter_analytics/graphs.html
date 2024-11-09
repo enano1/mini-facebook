@@ -1,23 +1,21 @@
 {% extends 'voter_analytics/base.html' %}
 
 {% block content %}
-<h1>Voter Graphs</h1>
+<div class="container">
+    <h1>Voter Data Graphs</h1>
 
-<h2>Graphs</h2>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
 
-<div style="text-align: center;">
-    <h3 style="display: inline-block;">Distribution of Voters by Year of Birth</h3>
-    {{ graph_birth_year|safe }}
+    <h2>Distribution of Voters by Year of Birth</h2>
+    <div class="graph">{{ yob_chart|safe }}</div>
+
+    <h2>Distribution of Voters by Party Affiliation</h2>
+    <div class="graph">{{ party_pie_chart|safe }}</div>
+
+    <h2>Voting Participation</h2>
+    <div class="graph">{{ participation_chart|safe }}</div>
 </div>
-
-<div style="text-align: center;">
-    <h3 style="display: inline-block;">Distribution of Voters by Party Affiliation</h3>
-    {{ graph_party_affiliation|safe }}
-</div>
-
-<div style="text-align: center;">
-    <h3 style="display: inline-block;">Voter Participation in Elections</h3>
-    {{ graph_election_participation|safe }}
-</div>
-
 {% endblock %}

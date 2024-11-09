@@ -68,8 +68,19 @@
 </table>
 
 <div class="pagination">
-    {% for page_num in voters.paginator.page_range %}
-    <a href="?page={{ page_num }}">{{ page_num }}</a>
-    {% endfor %}
+    {% if is_paginated %}
+        <ul>
+            {% if page_obj.has_previous %}
+                <li><a href="?{% with request.GET.urlencode|slice:":5" as querystring %}{{ querystring }}&page={{ page_obj.previous_page_number }}{% endwith %}">Previous</a></li>
+            {% endif %}
+
+            <li>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</li>
+
+            {% if page_obj.has_next %}
+                <li><a href="?{% with request.GET.urlencode|slice:":5" as querystring %}{{ querystring }}&page={{ page_obj.next_page_number }}{% endwith %}">Next</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
 </div>
+
 {% endblock %}

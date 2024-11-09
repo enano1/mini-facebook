@@ -2,11 +2,13 @@
 <html>
 <head>
     <title>Voter Analytics</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'voter_analytics/voterstyles.css' %}">
 </head>
 <body>
     <nav>
         <a href="{% url 'voters' %}">Home</a>
-        {% comment %} <a href="{% url 'graphs' %}">Graphs</a> {% endcomment %}
+        <a href="{% url 'graphs' %}">Graphs</a>
     </nav>
     {% block content %}
     {% endblock %}
