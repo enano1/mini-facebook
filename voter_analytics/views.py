@@ -16,7 +16,7 @@ class VoterListView(ListView):
     paginate_by = 50  
 
     def get_queryset(self):
-        """Filter queryset based on search criteria."""
+        """Filter qs based on search criteria."""
         qs = super().get_queryset()
 
         # Add filters here
@@ -32,7 +32,6 @@ class VoterListView(ListView):
             'v23town': self.request.GET.get('v23town'),
         }
 
-        # Apply filters
         if party_affiliation:
             qs = qs.filter(party_affiliation=party_affiliation)
         if min_dob:
@@ -82,21 +81,21 @@ class GraphsView(ListView):
 
     def get_queryset(self):
         """Filter voters based on form data."""
-        queryset = super().get_queryset()
+        qs = super().get_queryset()
         form = VoterFilterForm(self.request.GET)
         if form.is_valid():
             if form.cleaned_data['party_affiliation']:
-                queryset = queryset.filter(party_affiliation=form.cleaned_data['party_affiliation'])
+                qs = qs.filter(party_affiliation=form.cleaned_data['party_affiliation'])
             if form.cleaned_data['min_date_of_birth']:
-                queryset = queryset.filter(date_of_birth__gte=form.cleaned_data['min_date_of_birth'])
+                qs = qs.filter(date_of_birth__gte=form.cleaned_data['min_date_of_birth'])
             if form.cleaned_data['max_date_of_birth']:
-                queryset = queryset.filter(date_of_birth__lte=form.cleaned_data['max_date_of_birth'])
+                qs = qs.filter(date_of_birth__lte=form.cleaned_data['max_date_of_birth'])
             if form.cleaned_data['voter_score']:
-                queryset = queryset.filter(voter_score=form.cleaned_data['voter_score'])
+                qs = qs.filter(voter_score=form.cleaned_data['voter_score'])
             for election in ['v20state', 'v21town', 'v21primary', 'v22general', 'v23town']:
                 if self.request.GET.get(election):
-                    queryset = queryset.filter(**{election: True})
-        return queryset
+                    qs = qs.filter(**{election: True})
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
