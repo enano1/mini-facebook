@@ -36,7 +36,7 @@ def load_data():
         reader = csv.DictReader(file)
         for row in reader:
             try:
-                precinct_number = int(row['Precinct Number'])  # Attempt to convert to integer
+                precinct_number = int(row['Precinct Number'])  
             except ValueError:
                 print(f"Skipping voter {row['First Name']} {row['Last Name']} due to invalid precinct: {row['Precinct Number']}")
                 continue
